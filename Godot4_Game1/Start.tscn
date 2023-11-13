@@ -129,6 +129,7 @@ texture = ExtResource("1_0i33t")
 sources/0 = SubResource("TileSetAtlasSource_44clw")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kgmfj"]
+radius = 43.1856
 
 [node name="Test" type="Node2D"]
 
@@ -147,8 +148,8 @@ script = ExtResource("2_2l67p")
 shape = SubResource("CircleShape2D_kgmfj")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(-1, -2)
-scale = Vector2(0.0101563, 0.0111111)
+position = Vector2(-6, -4)
+scale = Vector2(0.0558594, 0.0555556)
 texture = ExtResource("3_6p8pe")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="Player"]
