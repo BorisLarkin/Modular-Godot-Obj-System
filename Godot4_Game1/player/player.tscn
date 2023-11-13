@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd4p5jeqwb407"]
+
+[ext_resource type="Script" path="res://Player.cs" id="1_xsgij"]
+[ext_resource type="Texture2D" uid="uid://w4h63ytsq3bb" path="res://Квыпса.png" id="2_pwr2i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kgmfj"]
+radius = 43.1856
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(462, 120)
+script = ExtResource("1_xsgij")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kgmfj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-6, -4)
+scale = Vector2(0.0558594, 0.0555556)
+texture = ExtResource("2_pwr2i")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
