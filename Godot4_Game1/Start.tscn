@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bu36k1n2svfnw"]
+[gd_scene load_steps=8 format=3 uid="uid://bu36k1n2svfnw"]
 
 [ext_resource type="Texture2D" uid="uid://chf5jxhiwp6m8" path="res://rpg indoor tileset expansion 1 trans.png" id="1_0i33t"]
 [ext_resource type="Script" path="res://Player.cs" id="2_2l67p"]
 [ext_resource type="Texture2D" uid="uid://w4h63ytsq3bb" path="res://Квыпса.png" id="3_6p8pe"]
+[ext_resource type="AudioStream" uid="uid://52e0l8siamur" path="res://All-Devouring Narwhal Narwhal Phase (Extended) - Genshin Impact 4.2 OST [TubeRipper.com].mp3" id="4_7sbu7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_44clw"]
 texture = ExtResource("1_0i33t")
@@ -149,3 +150,11 @@ shape = SubResource("CircleShape2D_kgmfj")
 position = Vector2(-1, -2)
 scale = Vector2(0.0101563, 0.0111111)
 texture = ExtResource("3_6p8pe")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Player"]
+current = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_7sbu7")
+volume_db = -33.793
+autoplay = true
