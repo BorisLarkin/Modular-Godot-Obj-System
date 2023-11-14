@@ -9,10 +9,4 @@ public abstract partial class entity : CharacterBody2D
 	public override abstract void _PhysicsProcess(double delta);
 	public Vector2 direction;
 	public Vector2 velocity;
-
-	protected entity ptr;
-	public entity()
-	{
-		entity ptr = this;
-	}
 }

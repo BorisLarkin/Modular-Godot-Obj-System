@@ -20,7 +20,7 @@ public partial class Player : entity
 		{
 			if (Input.IsActionJustPressed("ui_dash"))
 			{
-				dash.Use(ptr);
+				dash.Use(this);
 			}
 			else
 			{
