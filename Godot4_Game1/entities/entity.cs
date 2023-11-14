@@ -6,5 +6,13 @@ public abstract partial class entity : CharacterBody2D
 	public float Speed = 100.0f;
 	// Called when the node enters the scene tree for the first time.
 	public float HP = 100.0f;
-	public override void _PhysicsProcess(double delta){}
+	public override abstract void _PhysicsProcess(double delta);
+	public Vector2 direction;
+	public Vector2 velocity;
+
+	protected entity ptr;
+	public entity()
+	{
+		entity ptr = this;
+	}
 }
