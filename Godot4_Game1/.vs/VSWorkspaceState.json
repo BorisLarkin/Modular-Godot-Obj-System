@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\abilities",
+    "\\abilities\\dash",
+    "\\entities",
+    "\\entities\\player"
+  ],
+  "SelectedNode": "\\abilities\\dash\\Dash.cs",
+  "PreviewInSolutionExplorer": false
+}
