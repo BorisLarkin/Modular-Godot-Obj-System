@@ -1,3 +1,12 @@
-[gd_scene format=3 uid="uid://btwnv7c1hvtj0"]
+[gd_scene load_steps=2 format=3 uid="uid://btwnv7c1hvtj0"]
+
+[ext_resource type="Script" path="res://entities/skills/Dash.cs" id="1_67go4"]
 
 [node name="Dash" type="Node2D"]
+script = ExtResource("1_67go4")
+
+[node name="DurationTimer" type="Timer" parent="."]
+wait_time = 0.439
+one_shot = true
+
+[connection signal="timeout" from="DurationTimer" to="." method="_on_duration_timer_timeout"]

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://52e0l8siamur"
+path="res://.godot/imported/All-Devouring Narwhal Narwhal Phase (Extended) - Genshin Impact 4.2 OST [TubeRipper.com].mp3-3172438caf1c84b10ea11c769082d239.mp3str"
+
+[deps]
+
+source_file="res://music/All-Devouring Narwhal Narwhal Phase (Extended) - Genshin Impact 4.2 OST [TubeRipper.com].mp3"
+dest_files=["res://.godot/imported/All-Devouring Narwhal Narwhal Phase (Extended) - Genshin Impact 4.2 OST [TubeRipper.com].mp3-3172438caf1c84b10ea11c769082d239.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

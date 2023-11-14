@@ -3,13 +3,14 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
-	public const float Speed = 300.0f;
-
+	public const float Speed = 100.0f;
+	public const float dash_speed = 400.0f;
+	public const float dash_duration = 0.5f;
+	private Dash dash;
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
 		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace ui actions with custom gameplay actions.
 		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 		if (direction != Vector2.Zero)
 		{
@@ -18,8 +19,17 @@ public partial class Player : CharacterBody2D
 		}
 		else
 		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-			velocity.Y = Mathf.MoveToward(Velocity.Y, 0, Speed);
+			if (Input.IsActionJustPressed("dash"))
+			{
+				Console.WriteLine("dashed");
+				velocity.X = Mathf.MoveToward(Velocity.X, 0, dash_speed);
+				velocity.Y = Mathf.MoveToward(Velocity.Y, 0, dash_speed);
+			}
+			else
+			{
+				velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+				velocity.Y = Mathf.MoveToward(Velocity.Y, 0, Speed);
+			}
 		}
 
 		Velocity = velocity;
