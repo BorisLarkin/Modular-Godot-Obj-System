@@ -3,9 +3,10 @@ using System;
 
 public partial class Player : entity
 {
-	public const float dash_speed = 400.0f;
-	public const float dash_duration = 3.0f;
-	private Dash dash = new Dash(dash_speed, false);
+	public const float d_speed = 400.0f;
+	public const float d_duration = 3.0f;
+	private Dash dash = new Dash{CD = 50.0f, use_time = 10.0f, cost = 0, dash_speed = d_speed, ghost_on = true};
+	
 	public override void _PhysicsProcess(double delta)
 	{
 		velocity = Velocity;
@@ -31,5 +32,11 @@ public partial class Player : entity
 
 		Velocity = velocity;
 		MoveAndSlide();
+	}
+
+	public Player()
+	{
+		Speed = 100.0f;
+		HP = 100.0f;
 	}
 }

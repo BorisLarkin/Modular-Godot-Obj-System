@@ -4,8 +4,8 @@ using System.Runtime.CompilerServices;
 
 public partial class Dash : Ability
 {
-    protected float dash_speed;
-    protected bool ghost_on = false;
+    public float dash_speed {get; set;}
+    public bool ghost_on {get; set;}
     public override void Use(entity Obj){
         GD.Print("dashed");
         Obj.velocity.X = Obj.direction.X * dash_speed;
@@ -22,9 +22,14 @@ public partial class Dash : Ability
     public Dash(float spd, bool ghost){
         dash_speed = spd;
         ghost_on = ghost;
+        CD = 50.0f;
+        use_time = 10.0f;
+        cost = 0;
     }
     public Dash(){
-        dash_speed = 200.0f;
-        ghost_on = false;
+        CD = 50.0f;
+        use_time = 10.0f;
+        cost = 0;
+
     }
 }

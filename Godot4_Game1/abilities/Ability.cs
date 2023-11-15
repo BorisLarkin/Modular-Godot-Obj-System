@@ -3,9 +3,9 @@ using System;
 
 public abstract partial class Ability : Node2D
 {
-	public float CD;
-	public float use_time;
-	public float cost;
+	public float CD {get; set;}
+	public float use_time{get; set;}
+	public float cost {get; set;}
 	public Timer useTimer;
 	protected Ability(){
 		CD = 0.5f;

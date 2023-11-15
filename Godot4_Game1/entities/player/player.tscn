@@ -11,6 +11,7 @@ position = Vector2(462, 120)
 script = ExtResource("1_031em")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_kgmfj")
