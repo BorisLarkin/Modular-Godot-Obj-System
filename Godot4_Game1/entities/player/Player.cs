@@ -3,9 +3,7 @@ using System;
 
 public partial class Player : entity
 {
-	public const float d_speed = 400.0f;
-	public const float d_duration = 3.0f;
-	private Dash dash = new Dash{CD = 50.0f, use_time = 10.0f, cost = 0, dash_speed = d_speed, ghost_on = true};
+	private Dash dash = new Dash{CD = 50.0f, use_time = 10.0f, cost = 0, dash_speed = 400.0f, ghost_on = true};
 	
 	public override void _PhysicsProcess(double delta)
 	{
@@ -33,9 +31,18 @@ public partial class Player : entity
 		Velocity = velocity;
 		MoveAndSlide();
 	}
-
-	public Player()
+	 public override object Clone()
+     {
+         return new Player(this);
+     }
+	protected Player(Player Obj)
 	{
+		dash = new Dash(Obj.dash);
+		Speed = Obj.Speed;
+		HP = Obj.HP;
+	}
+	protected Player(){
+		dash = new Dash();
 		Speed = 100.0f;
 		HP = 100.0f;
 	}

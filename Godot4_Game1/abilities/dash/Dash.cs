@@ -10,14 +10,8 @@ public partial class Dash : Ability
         GD.Print("dashed");
         Obj.velocity.X = Obj.direction.X * dash_speed;
 		Obj.velocity.Y = Obj.direction.Y * dash_speed;
-        useTimer.WaitTime = use_time;
-        useTimer.Start();
-    }
-    public void start_dash(){
-        useTimer.Start();
-    }
-    public bool is_dashing(){
-        return !useTimer.IsStopped();
+        //useTimer.WaitTime = use_time;
+        //useTimer.Start();
     }
     public Dash(float spd, bool ghost){
         dash_speed = spd;
@@ -30,6 +24,10 @@ public partial class Dash : Ability
         CD = 50.0f;
         use_time = 10.0f;
         cost = 0;
-
+    }
+    public Dash(Dash Obj){
+        CD = Obj.CD;
+        use_time = Obj.use_time;
+        cost = Obj.cost;
     }
 }
