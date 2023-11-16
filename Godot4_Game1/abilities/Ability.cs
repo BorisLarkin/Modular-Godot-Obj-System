@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public abstract partial class Ability : Node2D
+public abstract partial class Ability : Timer
 {
 	public float CD {get; set;}
 	public float use_time{get; set;}
