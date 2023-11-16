@@ -10,8 +10,8 @@ public partial class Dash : Ability
         GD.Print("dashed");
         Obj.velocity.X = Obj.direction.X * dash_speed;
 		Obj.velocity.Y = Obj.direction.Y * dash_speed;
-        //useTimer.WaitTime = use_time;
-        //useTimer.Start();
+        useTimer.WaitTime = use_time;
+        useTimer.Start();
     }
     public Dash(float spd, bool ghost){
         dash_speed = spd;
@@ -20,14 +20,19 @@ public partial class Dash : Ability
         use_time = 10.0f;
         cost = 0;
     }
+    public Dash(Dash Obj)
+    {
+        dash_speed = Obj.dash_speed;
+        ghost_on = Obj.ghost_on;
+    }
     public Dash(){
         CD = 50.0f;
         use_time = 10.0f;
         cost = 0;
     }
-    public Dash(Dash Obj){
-        CD = Obj.CD;
-        use_time = Obj.use_time;
-        cost = Obj.cost;
+    public override object Clone()
+    {
+       return new Dash(this);
     }
+    
 }

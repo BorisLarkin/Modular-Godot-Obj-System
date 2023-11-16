@@ -33,7 +33,7 @@ public partial class Player : entity
 	}
 	 public override object Clone()
      {
-         return new Player(this);
+        return new Player(this);
      }
 	protected Player(Player Obj)
 	{
