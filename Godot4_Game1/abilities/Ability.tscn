@@ -7,4 +7,7 @@ script = ExtResource("1_e0fy7")
 
 [node name="useTimer" type="Timer" parent="."]
 
+[node name="CDTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="useTimer" to="." method="_on_use_timer_timeout"]
+[connection signal="timeout" from="CDTimer" to="." method="_on_cd_timer_timeout"]

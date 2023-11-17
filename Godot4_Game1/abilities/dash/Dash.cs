@@ -34,5 +34,4 @@ public partial class Dash : Ability
     {
        return new Dash(this);
     }
-    
 }
