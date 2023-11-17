@@ -7,10 +7,8 @@ public partial class Dash : Ability
     public float dash_speed;
     public bool ghost_on;
     protected override void Use(entity Obj){
-        GD.Print("dashed\n", "ds = ", dash_speed, "\nCD = ", CD, "\nuse_t = ", use_time);
         Obj.velocity.X = Obj.direction.X * dash_speed;
 		Obj.velocity.Y = Obj.direction.Y * dash_speed;
-        useTimer.WaitTime = use_time;
     }
     public Dash(Dash Obj) : base(Obj)
     {
@@ -20,7 +18,6 @@ public partial class Dash : Ability
 
     public Dash(float cd, float uset, float ct, float dash_spd, bool ghost) : base(cd, uset, ct)
     {
-        GD.Print("constructed right1");
         dash_speed = dash_spd;
         ghost_on = ghost;
     }

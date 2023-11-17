@@ -3,7 +3,7 @@ using System;
 
 public partial class Player : entity
 {
-	private Dash dash = new Dash(120f, 40.0f, 0, 600.0f, true);
+	private Dash dash = new Dash(100.0f, 40.0f, 0, 600.0f, true);
 	
 	public override void _PhysicsProcess(double delta)
 	{

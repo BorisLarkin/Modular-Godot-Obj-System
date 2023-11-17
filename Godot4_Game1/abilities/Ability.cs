@@ -14,8 +14,8 @@ public abstract partial class Ability
 	
 	public void UseAbility(entity Obj)
 	{
-		GD.Print(use_time, CD);
 		if (CanUse){
+			//useTimer.Start();
 			Use(Obj);
 		}
 	}
@@ -35,7 +35,6 @@ public abstract partial class Ability
 		}
 	}
 	protected Ability(float cd, float uset, float ct){
-		GD.Print("constructed right2");
 		CD = cd;
 		use_time = uset;
 		cost = ct;
