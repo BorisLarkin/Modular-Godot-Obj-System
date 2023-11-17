@@ -3,7 +3,7 @@ using System;
 
 public partial class Player : entity
 {
-	private Dash dash = new Dash{CD = 50.0f, use_time = 10.0f, cost = 0, dash_speed = 400.0f, ghost_on = true};
+	private Dash dash = new Dash(120f, 40.0f, 0, 600.0f, true);
 	
 	public override void _PhysicsProcess(double delta)
 	{
@@ -19,7 +19,7 @@ public partial class Player : entity
 		{
 			if (Input.IsActionJustPressed("ui_dash"))
 			{
-				dash.Use(this);
+				dash.UseAbility(this);
 			}
 			else
 			{
@@ -41,8 +41,8 @@ public partial class Player : entity
 		Speed = Obj.Speed;
 		HP = Obj.HP;
 	}
-	protected Player(){
-		dash = new Dash();
+	protected Player()
+	{
 		Speed = 100.0f;
 		HP = 100.0f;
 	}

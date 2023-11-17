@@ -1,24 +1,25 @@
 using Godot;
 using System;
-
+using System.Reflection.Metadata; 
 public abstract partial class Ability
 {
-	public float CD {get; set;}
-	public float use_time{get; set;}
-	public float cost {get; set;}
+	public float CD;
+	public float use_time;
+	public float cost;
 	public Timer useTimer;
 	public Timer CDTimer;
 	protected bool CanUse;
-	protected Ability(){
-		CD = 0.5f;
-		use_time = 0.2f;
-		cost = 0.0f;
-		useTimer = new Timer();
-		CDTimer = new Timer();
-		CanUse = true;
-	}
-	public abstract void Use(entity Obj);
 	
+	protected abstract void Use(entity Obj);
+	
+	public void UseAbility(entity Obj)
+	{
+		GD.Print(use_time, CD);
+		if (CanUse){
+			Use(Obj);
+		}
+	}
+
 	protected Ability(Ability Obj){
 		if (this != Obj){
 			this.CD = Obj.CD;
@@ -28,20 +29,36 @@ public abstract partial class Ability
 			this.CDTimer = new Timer();
 			useTimer.WaitTime = use_time;
 			CDTimer.WaitTime = CD;
+			useTimer.Autostart = true;
+			CDTimer.Autostart = true;
 			CanUse = true;
 		}
+	}
+	protected Ability(float cd, float uset, float ct){
+		GD.Print("constructed right2");
+		CD = cd;
+		use_time = uset;
+		cost = ct;
+		useTimer = new Timer();
+		CDTimer = new Timer();
+		CDTimer.WaitTime = CD;
+		useTimer.WaitTime = use_time;
+		useTimer.Autostart = true;
+		CDTimer.Autostart = true;
+		CanUse = true;
 	}
 	
 	public abstract object Clone();
 
 	protected void _on_use_timer_timeout()
     {
+		GD.Print("use_t timeout");
         CanUse = false;
-        CDTimer.Start();
     }
 
     protected void _on_cd_timer_timeout()
     {
+		GD.Print("cd_t timeout");
         CanUse = true;
     }
 }
