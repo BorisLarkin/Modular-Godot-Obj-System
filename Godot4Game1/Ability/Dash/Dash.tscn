@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://btwnv7c1hvtj0"]
+
+[ext_resource type="Script" path="res://Ability/Dash/Dash.cs" id="1_67go4"]
+[ext_resource type="PackedScene" uid="uid://dfutuucgj5pl3" path="res://Ability/Ability.tscn" id="2_6qnhh"]
+
+[node name="Dash" type="Node2D"]
+script = ExtResource("1_67go4")
+
+[node name="Ability" parent="." instance=ExtResource("2_6qnhh")]

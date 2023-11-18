@@ -1,7 +1,6 @@
 using Godot;
 using System;
-using System.Reflection.Metadata; 
-public abstract partial class Ability
+public partial class Ability : Node2D
 {
 	public float CD;
 	public float use_time;
@@ -11,18 +10,19 @@ public abstract partial class Ability
 	
 	protected bool CanUse;
 	
-	protected abstract void Use(entity Obj);
+	protected virtual void Use(entity Obj){}
 	
 	public void UseAbility(entity Obj)
 	{
 		if (CanUse){
-			useTimer.Start();
+			//useTimer.Start();
 			Use(Obj);
 		}
 	}
 
 	protected Ability(Ability Obj){
 		if (this != Obj){
+			
 			this.CD = Obj.CD;
 			this.use_time = Obj.use_time;
 			this.cost = Obj.cost;
@@ -36,6 +36,7 @@ public abstract partial class Ability
 		}
 	}
 	protected Ability(float cd, float uset, float ct){
+		GD.Print("right constr");
 		CD = cd;
 		use_time = uset;
 		cost = ct;
@@ -47,9 +48,6 @@ public abstract partial class Ability
 		CDTimer.Autostart = true;
 		CanUse = true;
 	}
-	
-	public abstract object Clone();
-
 	protected void _on_use_timer_timeout()
     {
 		GD.Print("use_t timeout");
@@ -61,4 +59,5 @@ public abstract partial class Ability
 		GD.Print("cd_t timeout");
         CanUse = true;
     }
+	public Ability(){GD.Print("wrong constr");}
 }

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bu36k1n2svfnw"]
 
 [ext_resource type="Texture2D" uid="uid://chf5jxhiwp6m8" path="res://mesh/rpg indoor tileset expansion 1 trans.png" id="1_0i33t"]
-[ext_resource type="PackedScene" uid="uid://dd4p5jeqwb407" path="res://entities/player/player.tscn" id="2_r5rnq"]
+[ext_resource type="PackedScene" uid="uid://dd4p5jeqwb407" path="res://entity/Player/Player.tscn" id="2_r5rnq"]
 [ext_resource type="AudioStream" uid="uid://52e0l8siamur" path="res://music/All-Devouring Narwhal Narwhal Phase (Extended) - Genshin Impact 4.2 OST [TubeRipper.com].mp3" id="4_7sbu7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_44clw"]

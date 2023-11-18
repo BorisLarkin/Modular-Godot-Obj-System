@@ -1,7 +1,5 @@
 using Godot;
 using System;
-using System.Runtime.CompilerServices;  
-
 public partial class Dash : Ability
 {
     public float dash_speed;
@@ -18,10 +16,13 @@ public partial class Dash : Ability
 
     public Dash(float cd, float uset, float ct, float dash_spd, bool ghost) : base(cd, uset, ct)
     {
+        //PackedScene scene = ResourceLoader.Load<PackedScene>("res://Ability/Ability.tscn");
+		//AddChild(scene.Instantiate());
         dash_speed = dash_spd;
         ghost_on = ghost;
     }
-    public override object Clone()
+    public Dash () : base(){}
+    public object Clone()
     {
        return new Dash(this);
     }
