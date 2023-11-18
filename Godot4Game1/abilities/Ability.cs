@@ -8,6 +8,7 @@ public abstract partial class Ability
 	public float cost;
 	public Timer useTimer;
 	public Timer CDTimer;
+	
 	protected bool CanUse;
 	
 	protected abstract void Use(entity Obj);
@@ -15,7 +16,7 @@ public abstract partial class Ability
 	public void UseAbility(entity Obj)
 	{
 		if (CanUse){
-			//useTimer.Start();
+			useTimer.Start();
 			Use(Obj);
 		}
 	}
