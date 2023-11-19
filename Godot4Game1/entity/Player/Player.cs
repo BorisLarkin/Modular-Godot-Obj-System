@@ -3,16 +3,18 @@ using System;
 
 public partial class Player : entity
 {
+	private Dash dash;
+
 	public override object Clone()
-    {
-        return new Player(this);
-    }
+	{
+		return new Player(this);
+	}
 	protected Player(Player Obj)
 	{
 		dash = new Dash(100.0f, 40.0f, 0, 600.0f, true);
 		GD.Print("init copy player");
-		PackedScene scene = ResourceLoader.Load<PackedScene>("res://Ability/Dash/Dash.tscn");
-		AddChild(scene.Instantiate());
+		//PackedScene scene = ResourceLoader.Load<PackedScene>("res://Ability/Dash/Dash.tscn");
+		//AddChild(scene.Instantiate());
 		dash = new Dash(Obj.dash);
 		Speed = Obj.Speed;
 		HP = Obj.HP;
@@ -20,14 +22,12 @@ public partial class Player : entity
 	protected Player()
 	{
 		dash = new Dash(100.0f, 40.0f, 0, 600.0f, true);
-		PackedScene scene = ResourceLoader.Load<PackedScene>("res://Ability/Dash/Dash.tscn");
-		AddChild(scene.Instantiate());
+		//PackedScene scene = ResourceLoader.Load<PackedScene>("res://Ability/Dash/Dash.tscn");
+		//AddChild(scene.Instantiate());
 		GD.Print("init player");
 		Speed = 100.0f;
 		HP = 100.0f;
-	}
-	private Dash dash;
-	
+	}	
 	public override void _PhysicsProcess(double delta)
 	{
 		velocity = Velocity;
