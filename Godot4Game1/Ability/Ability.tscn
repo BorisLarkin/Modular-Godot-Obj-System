@@ -7,11 +7,10 @@ script = ExtResource("1_e0fy7")
 
 [node name="useTimer" type="Timer" parent="."]
 wait_time = 0.291
-one_shot = true
 
 [node name="CDTimer" type="Timer" parent="."]
 wait_time = 0.504
-one_shot = true
 
+[connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="timeout" from="useTimer" to="." method="_on_use_timer_timeout"]
 [connection signal="timeout" from="CDTimer" to="." method="_on_cd_timer_timeout"]

@@ -12,10 +12,18 @@ public partial class Ability : Node2D
 	
 	protected virtual void Use(entity Obj){}
 	
+	void _on_ready()
+	{
+		GD.Print("Entered");
+		useTimer = GetNode<Timer>("useTimer");
+		CDTimer = GetNode<Timer>("CDTimer");
+		useTimer.WaitTime = use_time;
+		CDTimer.WaitTime = CD;
+		useTimer.Start();
+	}
 	public void UseAbility(entity Obj)
 	{
 		if (CanUse){
-			//useTimer.Start();
 			GD.Print("dashed ", CD);
 			Use(Obj);
 		}
@@ -26,8 +34,6 @@ public partial class Ability : Node2D
 			this.CD = Obj.CD;
 			this.use_time = Obj.use_time;
 			this.cost = Obj.cost;
-			//useTimer.WaitTime = use_time;
-			//CDTimer.WaitTime = CD;
 			CanUse = true;
 		}
 	}
@@ -36,19 +42,12 @@ public partial class Ability : Node2D
 		CD = cd;
 		use_time = uset;
 		cost = ct;
-		//useTimer = new Timer();
-		//CDTimer = new Timer();
-		//useTimer = GetNode("res://Ability/Ability.tscn").GetNode<Timer>("useTimer");
-		//CDTimer = GetNode<Timer>("CDTimer");
-		//CDTimer.WaitTime = CD;
-		//useTimer.WaitTime = use_time;
-		//useTimer.Autostart = true;
-		//CDTimer.Autostart = true;
 		CanUse = true;
 	}
 	protected void _on_use_timer_timeout()
 	{
 		GD.Print("use_t timeout");
+		CDTimer.Start();
 		CanUse = false;
 	}
 
@@ -58,17 +57,10 @@ public partial class Ability : Node2D
 		CanUse = true;
 	}
 	public Ability(){
+		GD.Print("wrong constr");
 		CD = 50.0f;
 		use_time = 10.0f;
 		cost = 0.0f;
-		/*
-		useTimer = new Timer();
-		CDTimer = new Timer();
-		CDTimer.WaitTime = CD;
-		useTimer.WaitTime = use_time;
-		useTimer.Autostart = true;
-		CDTimer.Autostart = true;
-		*/
 		CanUse = true;
 		}
 }
