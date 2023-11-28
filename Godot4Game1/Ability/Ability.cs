@@ -58,8 +58,8 @@ public partial class Ability : Node2D
 	}
 	public Ability(){
 		GD.Print("wrong constr");
-		CD = 50.0f;
-		use_time = 10.0f;
+		CD = 5.0f;
+		use_time = 1.0f;
 		cost = 0.0f;
 		CanUse = true;
 		}
