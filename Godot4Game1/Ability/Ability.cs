@@ -12,7 +12,8 @@ public partial class Ability : Node2D
 	
 	protected virtual void Use(entity Obj){}
 	
-	void _on_ready()
+	
+	void _on_tree_entered()
 	{
 		GD.Print("Entered");
 		useTimer = GetNode<Timer>("useTimer");
@@ -20,7 +21,7 @@ public partial class Ability : Node2D
 		useTimer.WaitTime = use_time;
 		CDTimer.WaitTime = CD;
 	}
-
+	
 	
 	public void UseAbility(entity Obj)
 	{
@@ -45,6 +46,8 @@ public partial class Ability : Node2D
 		use_time = uset;
 		cost = ct;
 		CanUse = true;
+		//useTimer.WaitTime = use_time;
+		//CDTimer.WaitTime = CD;
 	}
 	protected void _on_use_timer_timeout()
 	{
@@ -60,5 +63,8 @@ public partial class Ability : Node2D
 	}
 	public Ability(){
 		GD.Print("wrong constr");
+		CD=1.0f;
+		use_time=0.5f;
+		cost = 0;
 	}
 }

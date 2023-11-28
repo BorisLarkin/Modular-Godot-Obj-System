@@ -10,6 +10,11 @@ public partial class Player : entity
 		return new Player(this);
 	}
 
+	void _on_dash_ready()
+	{
+		GD.Print("Dash ready");
+		dash = new Dash(2.0f, 1.0f, 0, 600.0f, true);
+	}
 	protected Player(Player Obj)
 	{
 		//dash = new Dash(2.0f, 1.0f, 0, 600.0f, true);
@@ -21,7 +26,6 @@ public partial class Player : entity
 	protected Player()
 	{
 		GD.Print("init player");
-		dash = new Dash(2.0f, 1.0f, 0, 600.0f, true);
 		Speed = 100.0f;
 		HP = 100.0f;
 		GD.Print("exited init player");

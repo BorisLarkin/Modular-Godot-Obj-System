@@ -26,3 +26,5 @@ texture = ExtResource("2_pwr2i")
 current = true
 
 [node name="Dash" parent="." instance=ExtResource("3_mal26")]
+
+[connection signal="ready" from="Dash" to="." method="_on_dash_ready"]
