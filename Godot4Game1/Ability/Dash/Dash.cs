@@ -23,8 +23,6 @@ public partial class Dash : Ability
 	public Dash () : base()
 	{
 		GD.Print("Dash base");
-		dash_speed = 400.0f;
-		ghost_on = false;
 	}
 	public object Clone()
 	{

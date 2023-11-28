@@ -9,9 +9,10 @@ public partial class Player : entity
 	{
 		return new Player(this);
 	}
+
 	protected Player(Player Obj)
 	{
-		dash = new Dash(2.0f, 1.0f, 0, 600.0f, true);
+		//dash = new Dash(2.0f, 1.0f, 0, 600.0f, true);
 		GD.Print("init copy player");
 		dash = new Dash(Obj.dash);
 		Speed = Obj.Speed;
@@ -19,10 +20,11 @@ public partial class Player : entity
 	}
 	protected Player()
 	{
-		dash = new Dash(100.0f, 40.0f, 0, 600.0f, true);
 		GD.Print("init player");
+		dash = new Dash(2.0f, 1.0f, 0, 600.0f, true);
 		Speed = 100.0f;
 		HP = 100.0f;
+		GD.Print("exited init player");
 	}	
 	public override void _PhysicsProcess(double delta)
 	{

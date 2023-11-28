@@ -19,11 +19,13 @@ public partial class Ability : Node2D
 		CDTimer = GetNode<Timer>("CDTimer");
 		useTimer.WaitTime = use_time;
 		CDTimer.WaitTime = CD;
-		useTimer.Start();
 	}
+
+	
 	public void UseAbility(entity Obj)
 	{
 		if (CanUse){
+			useTimer.Start();
 			GD.Print("dashed ", CD);
 			Use(Obj);
 		}
@@ -58,9 +60,5 @@ public partial class Ability : Node2D
 	}
 	public Ability(){
 		GD.Print("wrong constr");
-		CD = 5.0f;
-		use_time = 1.0f;
-		cost = 0.0f;
-		CanUse = true;
-		}
+	}
 }
