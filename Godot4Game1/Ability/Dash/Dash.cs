@@ -40,8 +40,10 @@ public partial class Dash : Ability
 		use_time = uset;
 		cost = ct;
 		CanUse = true;
-		useTimer.WaitTime = use_time;
-		CDTimer.WaitTime = CD;
+		useTimer = GetNode("Ability").GetNode<Timer>("useTimer");
+		CDTimer = GetNode("Ability").GetNode<Timer>("CDTimer");
+		CDTimer.WaitTime = cd;
+		useTimer.WaitTime = uset;
 		dash_speed = dash_spd;
 		ghost_on = ghost;
 	}
