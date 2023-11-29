@@ -13,19 +13,36 @@ public partial class Dash : Ability
 		dash_speed = Obj.dash_speed;
 		ghost_on = Obj.ghost_on;
 	}
-
+	/*
 	public Dash(float cd, float uset, float ct, float dash_spd, bool ghost) : base(cd, uset, ct)
 	{
 		GD.Print("dash custom constr");
 		dash_speed = dash_spd;
 		ghost_on = ghost;
 	}
-	public Dash () : base()
+	*/
+
+	public Dash () 
 	{
 		GD.Print("Dash base");
+		dash_speed = 600f;
+		ghost_on = false;
 	}
 	public object Clone()
 	{
 	   return new Dash(this);
+	}
+
+	public void set(float cd, float uset, float ct, float dash_spd, bool ghost)
+	{
+		GD.Print("dash set");
+		CD = cd;
+		use_time = uset;
+		cost = ct;
+		CanUse = true;
+		useTimer.WaitTime = use_time;
+		CDTimer.WaitTime = CD;
+		dash_speed = dash_spd;
+		ghost_on = ghost;
 	}
 }

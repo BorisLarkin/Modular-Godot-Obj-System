@@ -13,7 +13,7 @@ public partial class Ability : Node2D
 	protected virtual void Use(entity Obj){}
 	
 	
-	void _on_tree_entered()
+	void _on_ready()
 	{
 		GD.Print("Entered");
 		useTimer = GetNode<Timer>("useTimer");
