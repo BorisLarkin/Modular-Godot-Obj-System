@@ -13,14 +13,6 @@ public partial class Dash : Ability
 		dash_speed = Obj.dash_speed;
 		ghost_on = Obj.ghost_on;
 	}
-	/*
-	public Dash(float cd, float uset, float ct, float dash_spd, bool ghost) : base(cd, uset, ct)
-	{
-		GD.Print("dash custom constr");
-		dash_speed = dash_spd;
-		ghost_on = ghost;
-	}
-	*/
 
 	public Dash () 
 	{

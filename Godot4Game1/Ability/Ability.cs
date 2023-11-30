@@ -25,14 +25,18 @@ public partial class Ability : Node2D
 	
 	public void UseAbility(entity Obj)
 	{
-		if (CanUse){
+		GD.Print("CanUse = ", CanUse);
+		if (CanUse == true){
 			useTimer.Start();
-			GD.Print("dashed ", CD);
+			CanUse = false;
+			GD.Print("dashed ", CanUse);
 			Use(Obj);
 		}
+		GD.Print("ended use");
 	}
 
 	protected Ability(Ability Obj){
+		GD.Print("copy");
 		if (this != Obj){
 			this.CD = Obj.CD;
 			this.use_time = Obj.use_time;
@@ -51,15 +55,14 @@ public partial class Ability : Node2D
 	}
 	protected void _on_use_timer_timeout()
 	{
-		GD.Print("use_t timeout");
+		GD.Print("use_t timeout", CanUse);
 		CDTimer.Start();
-		CanUse = false;
 	}
 
 	protected void _on_cd_timer_timeout()
 	{
-		GD.Print("cd_t timeout");
-		CanUse = true;
+		this.CanUse = true;
+		GD.Print("cd_t timeout", CanUse);
 	}
 	public Ability(){
 		GD.Print("wrong constr");
