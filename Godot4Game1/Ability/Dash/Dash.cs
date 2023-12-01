@@ -31,7 +31,6 @@ public partial class Dash : Ability
 		CD = cd;
 		use_time = uset;
 		cost = ct;
-		CanUse = true;
 		useTimer = GetNode("Ability").GetNode<Timer>("useTimer");
 		CDTimer = GetNode("Ability").GetNode<Timer>("CDTimer");
 		CDTimer.WaitTime = cd;
