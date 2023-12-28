@@ -19,41 +19,34 @@ public partial class Ability : Node2D
 	}
 	void _on_ready()
 	{
-		GD.Print("Entered");
 		useTimer = GetNode<Timer>("useTimer");
 		CDTimer = GetNode<Timer>("CDTimer");
 		useTimer.WaitTime = use_time;
 		CDTimer.WaitTime = CD;
 	}
 	
-	
 	public void UseAbility(entity Obj)
 	{
-		GD.Print("CanUse = ", CanUse);
 		if (CanUse == true){
 			useTimer.Start();
 			change_state();
-			GD.Print("dashed ", CanUse);
 			Use(Obj);
 		}
-		GD.Print("ended use");
 	}
 
 	protected Ability(Ability Obj){
-		GD.Print("copy");
 		if (this != Obj){
 			this.CD = Obj.CD;
 			this.use_time = Obj.use_time;
 			this.cost = Obj.cost;
-			CanUse = true;
+			change_state();
 		}
 	}
 	protected Ability(float cd, float uset, float ct){
-		GD.Print("right constr");
 		CD = cd;
 		use_time = uset;
 		cost = ct;
-		CanUse = true;
+		change_state();
 	}
 	protected void _on_use_timer_timeout()
 	{
@@ -67,7 +60,6 @@ public partial class Ability : Node2D
 		GD.Print("cd_t timeout", CanUse);
 	}
 	public Ability(){
-		GD.Print("wrong constr");
 		CD=1.0f;
 		use_time=0.5f;
 		cost = 0;
