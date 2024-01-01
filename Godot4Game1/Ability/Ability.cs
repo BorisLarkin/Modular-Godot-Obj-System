@@ -10,13 +10,8 @@ public partial class Ability : Node2D
 	
 	protected bool CanUse;
 	
-	protected virtual void Use(entity Obj){}
+	protected virtual void Use(entity Obj){	}
 	
-	protected void change_state(){
-		if (CanUse){CanUse = false; return;}
-		CanUse = true;
-		return;
-	}
 	void _on_ready()
 	{
 		useTimer = GetNode<Timer>("useTimer");
@@ -27,10 +22,11 @@ public partial class Ability : Node2D
 	
 	public void UseAbility(entity Obj)
 	{
+		GD.Print(CanUse);
 		if (CanUse == true){
-			useTimer.Start();
-			change_state();
 			Use(Obj);
+			CanUse = false;
+			useTimer.Start();
 		}
 	}
 
@@ -39,14 +35,14 @@ public partial class Ability : Node2D
 			this.CD = Obj.CD;
 			this.use_time = Obj.use_time;
 			this.cost = Obj.cost;
-			change_state();
+			CanUse = Obj.CanUse;
 		}
 	}
 	protected Ability(float cd, float uset, float ct){
 		CD = cd;
 		use_time = uset;
 		cost = ct;
-		change_state();
+		CanUse = true;
 	}
 	protected void _on_use_timer_timeout()
 	{
@@ -56,7 +52,7 @@ public partial class Ability : Node2D
 
 	protected void _on_cd_timer_timeout()
 	{
-		change_state();
+		CanUse=true;
 		GD.Print("cd_t timeout", CanUse);
 	}
 	public Ability(){

@@ -4,7 +4,8 @@ public partial class Dash : Ability
 {
 	public float dash_speed;
 	public bool ghost_on;
-	protected override void Use(entity Obj){
+	protected override void Use(entity Obj)
+	{
 		Obj.velocity.X = Obj.direction.X * dash_speed;
 		Obj.velocity.Y = Obj.direction.Y * dash_speed;
 	}
@@ -16,7 +17,7 @@ public partial class Dash : Ability
 
 	public Dash () 
 	{
-		GD.Print("Dash base");
+		GD.Print("Dash base:", CanUse);
 		dash_speed = 600f;
 		ghost_on = false;
 	}
