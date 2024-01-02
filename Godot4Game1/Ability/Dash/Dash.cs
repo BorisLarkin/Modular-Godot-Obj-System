@@ -1,6 +1,6 @@
 using Godot;
 using System;
-public partial class Dash : Ability
+public unsafe partial class Dash : Ability
 {
 	public float dash_speed;
 	public bool ghost_on;
@@ -17,7 +17,6 @@ public partial class Dash : Ability
 
 	public Dash () 
 	{
-		GD.Print("Dash base:", CanUse);
 		dash_speed = 600f;
 		ghost_on = false;
 	}

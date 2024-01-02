@@ -1,6 +1,6 @@
 using Godot;
 using System;
-public partial class Ability : Node2D
+public unsafe partial class Ability : Node2D
 {
 	public float CD;
 	public float use_time;
@@ -8,7 +8,7 @@ public partial class Ability : Node2D
 	public Timer useTimer;
 	public Timer CDTimer;
 	
-	protected bool CanUse;
+	protected bool* CanUse;
 	
 	protected virtual void Use(entity Obj){	}
 	
@@ -22,10 +22,10 @@ public partial class Ability : Node2D
 	
 	public void UseAbility(entity Obj)
 	{
-		GD.Print(CanUse);
-		if (CanUse == true){
+		GD.Print(*CanUse);
+		if (*CanUse == true){
 			Use(Obj);
-			CanUse = false;
+			*CanUse = false;
 			useTimer.Start();
 		}
 	}
@@ -42,23 +42,23 @@ public partial class Ability : Node2D
 		CD = cd;
 		use_time = uset;
 		cost = ct;
-		CanUse = true;
+		*CanUse = true;
 	}
 	protected void _on_use_timer_timeout()
 	{
-		GD.Print("use_t timeout", CanUse);
+		GD.Print("use_t timeout", *CanUse);
 		CDTimer.Start();
 	}
 
 	protected void _on_cd_timer_timeout()
 	{
-		CanUse=true;
-		GD.Print("cd_t timeout", CanUse);
+		*CanUse=true;
+		GD.Print("cd_t timeout", *CanUse);
 	}
 	public Ability(){
 		CD=1.0f;
 		use_time=0.5f;
 		cost = 0;
-		CanUse=true;
+		*CanUse=true;
 	}
 }
