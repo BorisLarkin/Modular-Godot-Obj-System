@@ -15,16 +15,12 @@ public unsafe partial class Dash : Ability
 		ghost_on = Obj.ghost_on;
 	}
 
-	public Dash () 
+	public Dash () : base() 
 	{
 		dash_speed = 600f;
 		ghost_on = false;
 		CanUse = *base.CanUseRef;
 		this.CanUseRef = base.CanUseRef;
-	}
-	public object Clone()
-	{
-	   return new Dash(this);
 	}
 
 	public void set(float cd, float uset, float ct, float dash_spd, bool ghost)

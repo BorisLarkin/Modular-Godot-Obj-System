@@ -13,7 +13,7 @@ public partial class Player : entity
 	void _on_dash_ready()
 	{
 		GD.Print("Dash ready");
-		dash = GetNode<Dash>("Dash");
+		dash = (Dash)GetNode<Dash>("Dash").Clone();
 		dash.set(2.0f, 1.0f, 0, 600.0f, true);
 	}
 	protected Player(Player Obj)
