@@ -8,7 +8,8 @@ public unsafe partial class Ability : Node2D
 	public Timer useTimer;
 	public Timer CDTimer;
 	
-	protected bool* CanUse;
+	protected bool CanUse = new bool();
+	public bool* CanUseRef;
 	
 	protected virtual void Use(entity Obj){	}
 	
@@ -18,14 +19,16 @@ public unsafe partial class Ability : Node2D
 		CDTimer = GetNode<Timer>("CDTimer");
 		useTimer.WaitTime = use_time;
 		CDTimer.WaitTime = CD;
+		CanUse = true;
+		*CanUseRef = true;
 	}
 	
 	public void UseAbility(entity Obj)
 	{
-		GD.Print(*CanUse);
-		if (*CanUse == true){
+		GD.Print(CanUse);
+		if (CanUse == true){
 			Use(Obj);
-			*CanUse = false;
+			CanUse = false;
 			useTimer.Start();
 		}
 	}
@@ -42,23 +45,31 @@ public unsafe partial class Ability : Node2D
 		CD = cd;
 		use_time = uset;
 		cost = ct;
-		*CanUse = true;
+		CanUse = new bool();
+		CanUse = true;
+		fixed (bool* Ref = &CanUse){
+				CanUseRef = Ref;
+		};
 	}
 	protected void _on_use_timer_timeout()
 	{
-		GD.Print("use_t timeout", *CanUse);
+		GD.Print("use_t timeout", CanUse);
 		CDTimer.Start();
 	}
 
 	protected void _on_cd_timer_timeout()
 	{
-		*CanUse=true;
-		GD.Print("cd_t timeout", *CanUse);
+		CanUse=true;
+		GD.Print("cd_t timeout", CanUse);
 	}
-	public Ability(){
+	public Ability()
+	{
 		CD=1.0f;
 		use_time=0.5f;
 		cost = 0;
-		*CanUse=true;
+		CanUse = true;
+		fixed (bool* Ref = &CanUse){
+			CanUseRef = Ref;
+		};
 	}
 }

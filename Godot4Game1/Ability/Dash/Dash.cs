@@ -19,6 +19,8 @@ public unsafe partial class Dash : Ability
 	{
 		dash_speed = 600f;
 		ghost_on = false;
+		CanUse = *base.CanUseRef;
+		this.CanUseRef = base.CanUseRef;
 	}
 	public object Clone()
 	{
@@ -37,5 +39,7 @@ public unsafe partial class Dash : Ability
 		useTimer.WaitTime = uset;
 		dash_speed = dash_spd;
 		ghost_on = ghost;
+		this.CanUse = base.CanUse;
+		this.CanUseRef = base.CanUseRef;
 	}
 }
