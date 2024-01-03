@@ -10,27 +10,52 @@ public unsafe partial class Ability : Node2D, ICloneable
 	protected Timer useTimer;
 	protected Timer CDTimer;
 	protected Node ParentalAbilityNode;
-	protected void set_canuse_true(){
+	protected bool is_using;
+	protected entity passive_application;
+	protected entity active_application;
+	protected string input_key;
+
+	public virtual void perform(entity obj){
+		if (get_state()){
+			Use(passive_application);
+		}
+		else{
+			if (Input.IsActionJustPressed("ui_dash")){
+				this.UseAbility(obj);
+				passive_application = obj;
+			}
+		} 
+	}
+	public bool get_state(){
+		return is_using;
+	}
+	public void set_state(bool x){
+		is_using = x;
+		return;
+	}
+	public void set_canuse_true(){
 		ParentalAbilityNode.SetMeta("CanUse",true);
 		return;
 	}
-	protected void set_canuse_false(){
+	public void set_canuse_false(){
 		ParentalAbilityNode.SetMeta("CanUse",false);
 		return;
 	}
-	protected bool get_use_state(){
+	public bool get_canuse_state(){
 		return (bool)ParentalAbilityNode.GetMeta("CanUse");
 	}
 	public object Clone()
 	{
 		return this.MemberwiseClone();
 	}
-	protected virtual void Use(entity Obj){}
-	public void UseAbility(entity Obj)
+	protected virtual void Use(entity obj){}
+	public void UseAbility(entity obj)
 	{
-		GD.Print(get_use_state());
-		if (get_use_state() == true){
-			Use(Obj);
+		GD.Print(get_canuse_state());
+		if (get_canuse_state() == true){
+			Use(obj);
+			passive_application = obj;
+			is_using = true;
 			set_canuse_false();
 			useTimer.Start();
 		}
@@ -42,6 +67,7 @@ public unsafe partial class Ability : Node2D, ICloneable
 		useTimer.WaitTime = use_time;
 		CDTimer.WaitTime = CD;
 		ParentalAbilityNode = GetNode(this.GetPath());
+		is_using = false;
 	}
 	
 	protected Ability(Ability Obj){
@@ -59,19 +85,21 @@ public unsafe partial class Ability : Node2D, ICloneable
 	}
 	protected void _on_use_timer_timeout()
 	{
-		GD.Print("use_t timeout", get_use_state());
+		is_using = false;
+		GD.Print("use_t timeout", get_canuse_state());
 		CDTimer.Start();
 	}
 
 	protected void _on_cd_timer_timeout()
 	{
 		set_canuse_true();
-		GD.Print("cd_t timeout", get_use_state());
+		GD.Print("cd_t timeout", get_canuse_state());
 	}
 	public Ability()
 	{
 		CD=1.0f;
 		use_time=0.5f;
 		cost = 0;
+		is_using = false;
 	}
 }

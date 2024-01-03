@@ -39,15 +39,9 @@ public partial class Player : entity
 		}
 		else
 		{
-			if (Input.IsActionJustPressed("ui_dash"))
-			{
-				dash.UseAbility(this);
-			}
-			else
-			{
-				velocity.X = direction.X * Speed;
-				velocity.Y = direction.Y * Speed;
-			}
+			dash.perform(this);
+			velocity.X = direction.X * Speed;
+			velocity.Y = direction.Y * Speed;
 		}
 
 		Velocity = velocity;
