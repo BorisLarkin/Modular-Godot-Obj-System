@@ -4,6 +4,7 @@ public unsafe partial class Dash : Ability
 {
 	public float dash_speed;
 	public bool ghost_on;
+
 	protected override void Use(entity Obj)
 	{
 		Obj.velocity.X = Obj.direction.X * dash_speed;
@@ -19,8 +20,8 @@ public unsafe partial class Dash : Ability
 	{
 		dash_speed = 600f;
 		ghost_on = false;
-		CanUse = *base.CanUseRef;
-		this.CanUseRef = base.CanUseRef;
+		CanUse = base.CanUse;
+
 	}
 
 	public void set(float cd, float uset, float ct, float dash_spd, bool ghost)
@@ -36,6 +37,5 @@ public unsafe partial class Dash : Ability
 		dash_speed = dash_spd;
 		ghost_on = ghost;
 		this.CanUse = base.CanUse;
-		this.CanUseRef = base.CanUseRef;
 	}
 }

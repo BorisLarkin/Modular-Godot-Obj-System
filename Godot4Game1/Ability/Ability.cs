@@ -7,11 +7,10 @@ public unsafe partial class Ability : Node2D, ICloneable
 	public float CD;
 	public float use_time;
 	public float cost;
-	public Timer useTimer;
-	public Timer CDTimer;
+	protected Timer useTimer;
+	protected Timer CDTimer;
 	
-	protected bool CanUse = new bool();
-	public bool* CanUseRef;
+	protected Godot.Variant CanUse;
 	public object Clone()
 	{
 		return this.MemberwiseClone();
@@ -24,17 +23,15 @@ public unsafe partial class Ability : Node2D, ICloneable
 		CDTimer = GetNode<Timer>("CDTimer");
 		useTimer.WaitTime = use_time;
 		CDTimer.WaitTime = CD;
-		fixed (bool* Ref = &CanUse){
-			CanUseRef = Ref;
-		};
+
 	}
 	
 	public void UseAbility(entity Obj)
 	{
-		GD.Print((ulong)CanUseRef);
-		if (*CanUseRef == true){
+		GD.Print(CanUse);
+		if ((bool)CanUse == true){
 			Use(Obj);
-			*CanUseRef = false;
+			SetMeta("CanUse",false);
 			useTimer.Start();
 		}
 	}
@@ -45,28 +42,24 @@ public unsafe partial class Ability : Node2D, ICloneable
 			this.use_time = Obj.use_time;
 			this.cost = Obj.cost;
 			CanUse = Obj.CanUse;
-			CanUseRef = Obj.CanUseRef;
 		}
 	}
 	protected Ability(float cd, float uset, float ct){
 		CD = cd;
 		use_time = uset;
 		cost = ct;
-		CanUse = new bool();
-		CanUse = true;
-		fixed (bool* Ref = &CanUse){
-			CanUseRef = Ref;
-		};
+		CanUse = GetMeta("CanUse");
+		SetMeta("CanUse",true);
 	}
 	protected void _on_use_timer_timeout()
 	{
-		GD.Print("use_t timeout", (ulong)CanUseRef,*CanUseRef);
+		GD.Print("use_t timeout", CanUse,CanUse);
 		CDTimer.Start();
 	}
 
 	protected void _on_cd_timer_timeout()
 	{
-		*CanUseRef=true;
+		SetMeta("CanUse",true);
 		GD.Print("cd_t timeout", CanUse);
 	}
 	public Ability()
@@ -74,9 +67,7 @@ public unsafe partial class Ability : Node2D, ICloneable
 		CD=1.0f;
 		use_time=0.5f;
 		cost = 0;
-		CanUse = true;
-		fixed (bool* Ref = &CanUse){
-			CanUseRef = Ref;
-		};
+		CanUse = GetMeta("CanUse");
+		SetMeta("CanUse",true);
 	}
 }

@@ -18,17 +18,14 @@ public partial class Player : entity
 	}
 	protected Player(Player Obj)
 	{
-		GD.Print("init copy player");
 		dash = new Dash(Obj.dash);
 		Speed = Obj.Speed;
 		HP = Obj.HP;
 	}
 	protected Player()
 	{
-		GD.Print("init player");
 		Speed = 100.0f;
 		HP = 100.0f;
-		GD.Print("exited init player");
 	}	
 	public override void _PhysicsProcess(double delta)
 	{
