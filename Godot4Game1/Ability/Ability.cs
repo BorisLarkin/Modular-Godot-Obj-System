@@ -9,29 +9,39 @@ public unsafe partial class Ability : Node2D, ICloneable
 	public float cost;
 	protected Timer useTimer;
 	protected Timer CDTimer;
-	protected virtual void set_canuse_true(){
-		SetMeta("CanUse",true);
+	protected Node ParentalAbilityNode;
+	protected void set_canuse_true(){
+		ParentalAbilityNode.SetMeta("CanUse",true);
 		return;
 	}
-	protected virtual void set_canuse_false(){
-		SetMeta("CanUse",false);
+	protected void set_canuse_false(){
+		ParentalAbilityNode.SetMeta("CanUse",false);
 		return;
 	}
-	protected virtual bool get_use_state(){
-		return (bool)GetMeta("CanUse");
+	protected bool get_use_state(){
+		return (bool)ParentalAbilityNode.GetMeta("CanUse");
 	}
 	public object Clone()
 	{
 		return this.MemberwiseClone();
 	}
 	protected virtual void Use(entity Obj){}
-	public virtual void UseAbility(entity Obj){}
+	public void UseAbility(entity Obj)
+	{
+		GD.Print(get_use_state());
+		if (get_use_state() == true){
+			Use(Obj);
+			set_canuse_false();
+			useTimer.Start();
+		}
+	}
 	void _on_ready()
 	{
 		useTimer = GetNode<Timer>("useTimer");
 		CDTimer = GetNode<Timer>("CDTimer");
 		useTimer.WaitTime = use_time;
 		CDTimer.WaitTime = CD;
+		ParentalAbilityNode = GetNode(this.GetPath());
 	}
 	
 	protected Ability(Ability Obj){

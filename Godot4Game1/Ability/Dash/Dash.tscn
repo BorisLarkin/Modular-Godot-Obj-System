@@ -5,6 +5,5 @@
 
 [node name="Dash" type="Node2D"]
 script = ExtResource("1_67go4")
-metadata/CanUse = true
 
 [node name="Ability" parent="." instance=ExtResource("2_6qnhh")]

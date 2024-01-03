@@ -4,17 +4,7 @@ public unsafe partial class Dash : Ability
 {
 	public float dash_speed;
 	public bool ghost_on;
-	protected override void set_canuse_true(){
-		SetMeta("CanUse",true);
-		return;
-	}
-	protected override void set_canuse_false(){
-		SetMeta("CanUse",false);
-		return;
-	}
-	protected override bool get_use_state(){
-		return (bool)GetMeta("CanUse");
-	}
+	
 	protected override void Use(entity Obj)
 	{
 		Obj.velocity.X = Obj.direction.X * dash_speed;
@@ -40,20 +30,10 @@ public unsafe partial class Dash : Ability
 		cost = ct;
 		useTimer = GetNode("Ability").GetNode<Timer>("useTimer");
 		CDTimer = GetNode("Ability").GetNode<Timer>("CDTimer");
+		ParentalAbilityNode = GetNode("Ability");
 		CDTimer.WaitTime = cd;
 		useTimer.WaitTime = uset;
 		dash_speed = dash_spd;
 		ghost_on = ghost;
-		SetMeta("CanUse", true);
-	}
-	
-	public override void UseAbility(entity Obj)
-	{
-		GD.Print(get_use_state());
-		if (get_use_state() == true){
-			Use(Obj);
-			set_canuse_false();
-			useTimer.Start();
-		}
 	}
 }
