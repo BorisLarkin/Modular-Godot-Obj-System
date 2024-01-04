@@ -14,24 +14,24 @@ public unsafe partial class Ability : Node2D, ICloneable
 	protected entity active_application; //to
 	protected string input_key; //input_key to enable kbm input in order to call the function. Otherwise cast on CD
 
-	public virtual void perform(entity obj){
+	public void perform(entity obj){
 		if (get_state()){
 			Use(passive_application);
 		}
 		else{
 			if (Input.IsActionJustPressed(input_key)){
-				this.UseAbility(obj);
+				UseAbility(obj);
 				passive_application = obj;
 			}
 		} 
 	}
-	public virtual void perform(entity from, entity to){
+	public void perform(entity from, entity to){
 		if (get_state()){
 			Use(passive_application, active_application);
 		}
 		else{
 			if (Input.IsActionJustPressed(input_key) || (input_key == null)){
-				this.UseAbility(from, to);
+				UseAbility(from, to);
 				passive_application = from;
 				active_application = to;
 			}
