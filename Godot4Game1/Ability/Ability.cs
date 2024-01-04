@@ -16,16 +16,14 @@ public unsafe partial class Ability : Node2D, ICloneable
 
 	public void perform(entity obj){
 		if (get_state()){
-			GD.Print("performing");
 			Use(passive_application);
 		}
 		else{
 			if (Input.IsActionJustPressed(input_key)){
-				GD.Print("first use");
 				UseAbility(obj);
 				passive_application = obj;
 			}
-		} 
+		}
 	}
 	public void perform(entity from, entity to){
 		if (get_state()){
@@ -61,7 +59,6 @@ public unsafe partial class Ability : Node2D, ICloneable
 	protected virtual void Use(entity from, entity to){}
 	public void UseAbility(entity obj)
 	{
-		GD.Print(get_canuse_state());
 		if (get_canuse_state() == true){
 			Use(obj);
 			passive_application = obj;
@@ -107,7 +104,6 @@ public unsafe partial class Ability : Node2D, ICloneable
 	}
 	protected void _on_use_timer_timeout()
 	{
-		GD.Print("use_t timeout", get_canuse_state(), get_state());
 		set_state(false);
 		CDTimer.Start();
 	}
@@ -115,7 +111,6 @@ public unsafe partial class Ability : Node2D, ICloneable
 	protected void _on_cd_timer_timeout()
 	{
 		set_canuse(true);
-		GD.Print("cd_t timeout", get_canuse_state(), get_state());
 	}
 	public Ability()
 	{
