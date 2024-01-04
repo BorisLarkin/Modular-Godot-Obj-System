@@ -20,7 +20,7 @@ public unsafe partial class Ability : Node2D, ICloneable
 			Use(passive_application);
 		}
 		else{
-			if (Input.IsActionJustPressed("ui_dash")){
+			if (Input.IsActionJustPressed(input_key)){
 				this.UseAbility(obj);
 				passive_application = obj;
 			}
@@ -31,7 +31,7 @@ public unsafe partial class Ability : Node2D, ICloneable
 			Use(passive_application, active_application);
 		}
 		else{
-			if (Input.IsActionJustPressed("ui_dash") || (input_key == null)){
+			if (Input.IsActionJustPressed(input_key) || (input_key == null)){
 				this.UseAbility(from, to);
 				passive_application = from;
 				active_application = to;
@@ -102,11 +102,12 @@ public unsafe partial class Ability : Node2D, ICloneable
 			this.cost = Obj.cost;
 		}
 	}
-	protected Ability(float cd, float uset, float ct){
+	protected Ability(float cd, float uset, float ct, string input_key){
 		CD = cd;
 		use_time = uset;
 		cost = ct;
 		set_canuse_true();
+		this.input_key = input_key;
 	}
 	protected void _on_use_timer_timeout()
 	{

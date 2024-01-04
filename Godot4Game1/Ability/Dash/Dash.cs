@@ -22,7 +22,7 @@ public unsafe partial class Dash : Ability
 		ghost_on = false;
 	}
 
-	public void set(float cd, float uset, float ct, float dash_spd, bool ghost)
+	public void set(float cd, float uset, float ct, float dash_spd, bool ghost, string input_key)
 	{
 		GD.Print("dash set");
 		CD = cd;
@@ -35,5 +35,6 @@ public unsafe partial class Dash : Ability
 		useTimer.WaitTime = uset;
 		dash_speed = dash_spd;
 		ghost_on = ghost;
+		this.input_key = input_key;
 	}
 }
