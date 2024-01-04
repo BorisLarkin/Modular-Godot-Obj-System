@@ -10,7 +10,6 @@ public unsafe partial class Ability : Node2D, ICloneable
 	protected Timer useTimer;
 	protected Timer CDTimer;
 	protected Node ParentalAbilityNode; //Connects parent ability node to inheriting children classes and nodes.
-	protected bool is_using;
 	protected entity passive_application; //from
 	protected entity active_application; //to
 	protected string input_key; //input_key to enable kbm input in order to call the function. Otherwise cast on CD
@@ -39,10 +38,10 @@ public unsafe partial class Ability : Node2D, ICloneable
 		} 
 	}
 	public bool get_state(){
-		return is_using;
+		return (bool)ParentalAbilityNode.GetMeta("is_using");
 	}
 	public void set_state(bool x){
-		is_using = x;
+		ParentalAbilityNode.SetMeta("is_using",x);
 		return;
 	}
 	public void set_canuse_true(){
@@ -92,7 +91,7 @@ public unsafe partial class Ability : Node2D, ICloneable
 		useTimer.WaitTime = use_time;
 		CDTimer.WaitTime = CD;
 		ParentalAbilityNode = GetNode(this.GetPath());
-		is_using = false;
+		set_state(false);
 	}
 	
 	protected Ability(Ability Obj){
@@ -126,6 +125,6 @@ public unsafe partial class Ability : Node2D, ICloneable
 		CD=1.0f;
 		use_time=0.5f;
 		cost = 0;
-		is_using = false;
+		set_state(false);
 	}
 }
