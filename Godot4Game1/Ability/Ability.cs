@@ -9,11 +9,11 @@ public unsafe partial class Ability : Node2D, ICloneable
 	public float cost;
 	protected Timer useTimer;
 	protected Timer CDTimer;
-	protected Node ParentalAbilityNode;
+	protected Node ParentalAbilityNode; //Connects parent ability node to inheriting children classes and nodes.
 	protected bool is_using;
-	protected entity passive_application;
-	protected entity active_application;
-	protected string input_key;
+	protected entity passive_application; //from
+	protected entity active_application; //to
+	protected string input_key; //input_key to enable kbm input in order to call the function. Otherwise cast on CD
 
 	public virtual void perform(entity obj){
 		if (get_state()){
@@ -23,6 +23,18 @@ public unsafe partial class Ability : Node2D, ICloneable
 			if (Input.IsActionJustPressed("ui_dash")){
 				this.UseAbility(obj);
 				passive_application = obj;
+			}
+		} 
+	}
+	public virtual void perform(entity from, entity to){
+		if (get_state()){
+			Use(passive_application, active_application);
+		}
+		else{
+			if (Input.IsActionJustPressed("ui_dash") || (input_key == null)){
+				this.UseAbility(from, to);
+				passive_application = from;
+				active_application = to;
 			}
 		} 
 	}
@@ -49,12 +61,25 @@ public unsafe partial class Ability : Node2D, ICloneable
 		return this.MemberwiseClone();
 	}
 	protected virtual void Use(entity obj){}
+	protected virtual void Use(entity from, entity to){}
 	public void UseAbility(entity obj)
 	{
 		GD.Print(get_canuse_state());
 		if (get_canuse_state() == true){
 			Use(obj);
 			passive_application = obj;
+			is_using = true;
+			set_canuse_false();
+			useTimer.Start();
+		}
+	}
+	public void UseAbility(entity from, entity to)
+	{
+		GD.Print(get_canuse_state());
+		if (get_canuse_state() == true){
+			Use(from, to);
+			passive_application = from;
+			active_application = to;
 			is_using = true;
 			set_canuse_false();
 			useTimer.Start();
