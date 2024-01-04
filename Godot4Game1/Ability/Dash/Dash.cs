@@ -24,7 +24,6 @@ public unsafe partial class Dash : Ability
 
 	public void set(float cd, float uset, float ct, float dash_spd, bool ghost, string input_key)
 	{
-		GD.Print("dash set");
 		CD = cd;
 		use_time = uset;
 		cost = ct;

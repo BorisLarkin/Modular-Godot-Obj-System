@@ -12,7 +12,6 @@ public partial class Player : entity
 
 	void _on_dash_ready()
 	{
-		GD.Print("Dash ready");
 		dash = GetNode<Dash>("Dash");
 		dash.set(1.0f, 2.0f, 0, 800.0f, true, "ui_dash");
 	}

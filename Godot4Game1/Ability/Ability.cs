@@ -16,10 +16,12 @@ public unsafe partial class Ability : Node2D, ICloneable
 
 	public void perform(entity obj){
 		if (get_state()){
+			GD.Print("performing");
 			Use(passive_application);
 		}
 		else{
 			if (Input.IsActionJustPressed(input_key)){
+				GD.Print("first use");
 				UseAbility(obj);
 				passive_application = obj;
 			}
