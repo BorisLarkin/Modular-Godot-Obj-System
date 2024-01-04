@@ -44,12 +44,8 @@ public unsafe partial class Ability : Node2D, ICloneable
 		ParentalAbilityNode.SetMeta("is_using",x);
 		return;
 	}
-	public void set_canuse_true(){
-		ParentalAbilityNode.SetMeta("CanUse",true);
-		return;
-	}
-	public void set_canuse_false(){
-		ParentalAbilityNode.SetMeta("CanUse",false);
+	public void set_canuse(bool x){
+		ParentalAbilityNode.SetMeta("CanUse",x);
 		return;
 	}
 	public bool get_canuse_state(){
@@ -68,7 +64,7 @@ public unsafe partial class Ability : Node2D, ICloneable
 			Use(obj);
 			passive_application = obj;
 			set_state(true);
-			set_canuse_false();
+			set_canuse(false);
 			useTimer.Start();
 		}
 	}
@@ -80,7 +76,7 @@ public unsafe partial class Ability : Node2D, ICloneable
 			passive_application = from;
 			active_application = to;
 			set_state(true);
-			set_canuse_false();
+			set_canuse(false);
 			useTimer.Start();
 		}
 	}
@@ -105,7 +101,6 @@ public unsafe partial class Ability : Node2D, ICloneable
 		CD = cd;
 		use_time = uset;
 		cost = ct;
-		set_canuse_true();
 		this.input_key = input_key;
 	}
 	protected void _on_use_timer_timeout()
@@ -117,7 +112,7 @@ public unsafe partial class Ability : Node2D, ICloneable
 
 	protected void _on_cd_timer_timeout()
 	{
-		set_canuse_true();
+		set_canuse(true);
 		GD.Print("cd_t timeout", get_canuse_state(), get_state());
 	}
 	public Ability()
@@ -125,6 +120,5 @@ public unsafe partial class Ability : Node2D, ICloneable
 		CD=1.0f;
 		use_time=0.5f;
 		cost = 0;
-		set_state(false);
 	}
 }
