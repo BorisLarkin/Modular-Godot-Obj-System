@@ -68,7 +68,7 @@ public unsafe partial class Ability : Node2D, ICloneable
 		if (get_canuse_state() == true){
 			Use(obj);
 			passive_application = obj;
-			is_using = true;
+			set_state(true);
 			set_canuse_false();
 			useTimer.Start();
 		}
@@ -80,7 +80,7 @@ public unsafe partial class Ability : Node2D, ICloneable
 			Use(from, to);
 			passive_application = from;
 			active_application = to;
-			is_using = true;
+			set_state(true);
 			set_canuse_false();
 			useTimer.Start();
 		}
@@ -111,15 +111,15 @@ public unsafe partial class Ability : Node2D, ICloneable
 	}
 	protected void _on_use_timer_timeout()
 	{
-		is_using = false;
-		GD.Print("use_t timeout", get_canuse_state());
+		GD.Print("use_t timeout", get_canuse_state(), get_state());
+		set_state(false);
 		CDTimer.Start();
 	}
 
 	protected void _on_cd_timer_timeout()
 	{
 		set_canuse_true();
-		GD.Print("cd_t timeout", get_canuse_state());
+		GD.Print("cd_t timeout", get_canuse_state(), get_state());
 	}
 	public Ability()
 	{
