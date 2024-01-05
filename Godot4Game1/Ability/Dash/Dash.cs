@@ -35,5 +35,6 @@ public unsafe partial class Dash : Ability
 		dash_speed = dash_spd;
 		ghost_on = ghost;
 		this.input_key = input_key;
+		this.set_oneshot(false);
 	}
 }

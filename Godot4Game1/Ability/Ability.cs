@@ -15,7 +15,7 @@ public unsafe partial class Ability : Node2D, ICloneable
 	protected string input_key; //input_key to enable kbm input in order to call the function. Otherwise cast on CD
 
 	public void perform(entity obj){
-		if (get_state()){
+		if (get_state() & !is_oneshot()){
 			Use(passive_application);
 		}
 		else{
@@ -26,7 +26,7 @@ public unsafe partial class Ability : Node2D, ICloneable
 		}
 	}
 	public void perform(entity from, entity to){
-		if (get_state()){
+		if (get_state() & !is_oneshot()){
 			Use(passive_application, active_application);
 		}
 		else{
@@ -94,6 +94,7 @@ public unsafe partial class Ability : Node2D, ICloneable
 		CDTimer.WaitTime = CD;
 		ParentalAbilityNode = GetNode(this.GetPath());
 		set_state(false);
+		set_oneshot(true);
 	}
 	
 	protected Ability(Ability Obj){
