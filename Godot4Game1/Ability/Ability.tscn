@@ -6,6 +6,7 @@
 script = ExtResource("1_e0fy7")
 metadata/CanUse = true
 metadata/is_using = false
+metadata/OneShot = false
 
 [node name="useTimer" type="Timer" parent="."]
 wait_time = 0.291

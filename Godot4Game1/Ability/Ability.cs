@@ -51,6 +51,13 @@ public unsafe partial class Ability : Node2D, ICloneable
 	public bool get_canuse_state(){
 		return (bool)ParentalAbilityNode.GetMeta("CanUse");
 	}
+	public void set_oneshot(bool x){
+		ParentalAbilityNode.SetMeta("OneShot",x);
+		return;
+	}
+	public bool is_oneshot(){
+		return (bool)ParentalAbilityNode.GetMeta("OneShot");
+	}
 	public object Clone()
 	{
 		return this.MemberwiseClone();
