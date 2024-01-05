@@ -38,7 +38,7 @@ public partial class Player : entity
 		}
 		else
 		{
-			dash.perform(this);
+			perform(dash);
 			//velocity.X = direction.X * Speed;
 			//velocity.Y = direction.Y * Speed;
 		}

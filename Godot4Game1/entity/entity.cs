@@ -32,4 +32,11 @@ public abstract partial class entity : CharacterBody2D, ICloneable
 	}
 	
 	public abstract object Clone();
+
+	public void perform(Ability a){
+		a.perform(this);
+	}
+	public void perform(Ability a, entity to){
+		a.perform(this, to);
+	}
 }
