@@ -25,25 +25,36 @@ public partial class Player : entity
 	{
 		//Speed = 100.0f;
 		HP = 100.0f;
+		max_speed = 200;
+		acceleration=100;
+		friction=250;
 	}	
 	public override void _PhysicsProcess(double delta)
 	{
-		velocity = Velocity;
-		// Get the input direction and handle the movement/deceleration.
+		// Input direction and handling the movement/deceleration.
 		direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 		if (direction == Vector2.Zero)
 		{
-			//velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-			//velocity.Y = Mathf.MoveToward(Velocity.Y, 0, Speed);
+			if (velocity.Length() > friction * delta){
+				velocity -= velocity.Normalized() * (float)(friction * delta);
+			}
+			else{
+				velocity = Vector2.Zero;
+			}
 		}
 		else
 		{
 			perform(dash);
-			//velocity.X = direction.X * Speed;
-			//velocity.Y = direction.Y * Speed;
+			if (velocity.Length() > max_speed){
+				velocity -= velocity.Normalized() * (float)(friction * delta);
+				velocity += direction * acceleration * (float)delta;
+			}
+			else
+			{
+				velocity += direction * acceleration * (float)delta;
+				velocity = velocity.LimitLength(max_speed);
+			}
 		}
-
-		Velocity = velocity;
 		MoveAndSlide();
 	}
 }
