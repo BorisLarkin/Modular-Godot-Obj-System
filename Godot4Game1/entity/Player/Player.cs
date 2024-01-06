@@ -18,19 +18,18 @@ public partial class Player : entity
 	protected Player(Player Obj)
 	{
 		dash = new Dash(Obj.dash);
-		//Speed = Obj.Speed;
 		HP = Obj.HP;
 	}
 	protected Player()
 	{
-		//Speed = 100.0f;
 		HP = 100.0f;
 		max_speed = 200;
-		acceleration=100;
-		friction=250;
+		acceleration=400;
+		friction=500;
 	}	
 	public override void _PhysicsProcess(double delta)
 	{
+		velocity = Velocity;
 		// Input direction and handling the movement/deceleration.
 		direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 		if (direction == Vector2.Zero)
@@ -55,6 +54,7 @@ public partial class Player : entity
 				velocity = velocity.LimitLength(max_speed);
 			}
 		}
+		Velocity = velocity;
 		MoveAndSlide();
 	}
 }
