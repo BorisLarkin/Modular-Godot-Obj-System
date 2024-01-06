@@ -7,8 +7,7 @@ public unsafe partial class Dash : Ability
 	
 	protected override void Use(entity Obj)
 	{
-		Obj.velocity.X = Obj.direction.X * dash_speed;
-		Obj.velocity.Y = Obj.direction.Y * dash_speed;
+		Obj.velocity = Obj.direction * dash_speed;
 	}
 	public Dash(Dash Obj) : base(Obj)
 	{
@@ -22,7 +21,7 @@ public unsafe partial class Dash : Ability
 		ghost_on = false;
 	}
 
-	public void set(float cd, float uset, float ct, float dash_spd, bool ghost, string input_key)
+	public void set(float cd, float uset, float ct, float dash_spd, bool ghost, string input_key, bool one_s)
 	{
 		CD = cd;
 		use_time = uset;
@@ -35,6 +34,6 @@ public unsafe partial class Dash : Ability
 		dash_speed = dash_spd;
 		ghost_on = ghost;
 		this.input_key = input_key;
-		this.set_oneshot(false);
+		this.set_oneshot(one_s);
 	}
 }
