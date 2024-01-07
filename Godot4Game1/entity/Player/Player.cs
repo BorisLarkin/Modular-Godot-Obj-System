@@ -33,7 +33,7 @@ public partial class Player : entity
 		// Input direction and handling the movement/deceleration.
 		direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 		if (velocity.Length() > max_speed){
-				velocity -= velocity.Normalized() * (float)(friction * delta);
+				velocity -= velocity.Normalized() * (float)(friction * delta)*1.1f;
 		}
 		if (direction == Vector2.Zero)
 		{
@@ -46,8 +46,10 @@ public partial class Player : entity
 		}
 		else
 		{
+			//cut out unnecessary velocity
+			if (direction.X == 0){velocity.X -= (float)(velocity.X * friction * delta)*0.01f;}
+			if (direction.Y == 0){velocity.Y -= (float)(velocity.Y * friction * delta)*0.01f;}
 			perform(dash);
-			
 			if (velocity.Length()<=max_speed)
 			{
 				velocity += direction * acceleration * (float)delta;
