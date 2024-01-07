@@ -24,7 +24,7 @@ public partial class Player : entity
 	{
 		HP = 100.0f;
 		max_speed = 200;
-		acceleration=400;
+		acceleration=600;
 		friction=500;
 	}	
 	public override void _PhysicsProcess(double delta)
