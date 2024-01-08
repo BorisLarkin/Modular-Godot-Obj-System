@@ -15,7 +15,6 @@ public partial class Player : entity
 	void _on_animation_tree_ready(){
 		AnimTree = GetNode<AnimationTree>("AnimationTree");
 		stateMachine = (AnimationNodeStateMachinePlayback)AnimTree.Get("parameters/playback");
-		AnimTree.Set("parameters/IDLE/blend_position",velocity); //Passes velocity vector to choose animation played
 	}
 	void _on_dash_ready()
 	{
@@ -70,8 +69,8 @@ public partial class Player : entity
 		}
 		else{
 			stateMachine.Travel("Walk");
-			AnimTree.Set("parameters/IDLE/blend_position",direction.Normalized()); //Passes velocity vector to choose animation played
-			AnimTree.Set("parameters/Walk/blend_position",direction.Normalized());
+			AnimTree.Set("parameters/IDLE/blend_position",velocity.Normalized()); //Passes velocity vector to choose animation played
+			AnimTree.Set("parameters/Walk/blend_position",velocity.Normalized());
 		}
 		
 		Velocity = velocity;
