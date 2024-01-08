@@ -5,6 +5,7 @@ public partial class Player : entity
 {
 	private Dash dash;
 	private AnimationTree AnimTree;
+	private AnimationNodeStateMachinePlayback stateMachine;
 
 	public override object Clone()
 	{
@@ -13,6 +14,7 @@ public partial class Player : entity
 
 	void _on_animation_tree_ready(){
 		AnimTree = GetNode<AnimationTree>("AnimationTree");
+		stateMachine = (AnimationNodeStateMachinePlayback)AnimTree.Get("parameters/playback");
 		AnimTree.Set("parameters/IDLE/blend_position",velocity); //Passes velocity vector to choose animation played
 	}
 	void _on_dash_ready()
@@ -37,9 +39,6 @@ public partial class Player : entity
 		velocity = Velocity;
 		// Input direction and handling the movement/deceleration.
 		direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-		if (velocity != Vector2.Zero){
-			AnimTree.Set("parameters/IDLE/blend_position",velocity); //Passes velocity vector to choose animation played
-		}
 		if (velocity.Length() > max_speed){
 				velocity -= velocity.Normalized() * (float)(friction * delta)*1.1f;
 		}
@@ -64,6 +63,17 @@ public partial class Player : entity
 				velocity = velocity.LimitLength(max_speed);
 			}
 		}
+		
+		if (velocity == Vector2.Zero){
+			//res://entity/Player/Player.tscn::AnimationNodeStateMachineTransition_b1bmp
+			stateMachine.Travel("IDLE");
+		}
+		else{
+			stateMachine.Travel("Walk");
+			AnimTree.Set("parameters/IDLE/blend_position",direction.Normalized()); //Passes velocity vector to choose animation played
+			AnimTree.Set("parameters/Walk/blend_position",direction.Normalized());
+		}
+		
 		Velocity = velocity;
 		MoveAndSlide();
 	}
