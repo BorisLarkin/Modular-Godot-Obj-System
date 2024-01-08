@@ -21,7 +21,7 @@ public unsafe partial class Dash : Ability
 		ghost_on = false;
 	}
 
-	public void set(float cd, float uset, float ct, float dash_spd, bool ghost, string input_key, bool one_s)
+	public void set(float cd, float uset, float ct, float dash_spd, bool ghost, string input_key, bool one_s) //Connects Nodes together
 	{
 		CD = cd;
 		use_time = uset;
