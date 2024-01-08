@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://btwnv7c1hvtj0" path="res://Ability/Dash/Dash.tscn" id="3_mal26"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_axth8"]
-size = Vector2(30, 36)
+size = Vector2(28, 34)
 
 [sub_resource type="Animation" id="Animation_0tfrr"]
 length = 0.001
@@ -234,6 +234,7 @@ states/Walk/position = Vector2(614, 157)
 transitions = ["Start", "IDLE", SubResource("AnimationNodeStateMachineTransition_lufvk"), "IDLE", "Walk", SubResource("AnimationNodeStateMachineTransition_b1bmp"), "Walk", "IDLE", SubResource("AnimationNodeStateMachineTransition_wg1uk")]
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 position = Vector2(462, 120)
 script = ExtResource("1_031em")
 
@@ -242,6 +243,7 @@ zoom = Vector2(2.5, 2.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_axth8")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1.62125e-05, 4.76837e-07)
