@@ -4,12 +4,17 @@ using System;
 public partial class Player : entity
 {
 	private Dash dash;
+	private AnimationTree AnimTree;
 
 	public override object Clone()
 	{
 		return new Player(this);
 	}
 
+	void _on_animation_tree_ready(){
+		AnimTree = GetNode<AnimationTree>("AnimationTree");
+		AnimTree.Set("parameters/IDLE/blend_position",velocity); //Passes velocity vector to choose animation played
+	}
 	void _on_dash_ready()
 	{
 		dash = GetNode<Dash>("Dash");
@@ -32,6 +37,9 @@ public partial class Player : entity
 		velocity = Velocity;
 		// Input direction and handling the movement/deceleration.
 		direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+		if (velocity != Vector2.Zero){
+			AnimTree.Set("parameters/IDLE/blend_position",velocity); //Passes velocity vector to choose animation played
+		}
 		if (velocity.Length() > max_speed){
 				velocity -= velocity.Normalized() * (float)(friction * delta)*1.1f;
 		}
